@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FLIPPY BOTTLE</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Background animations -->
+        <div class="bg-animation">
+            <div class="bg-blob bg-blob-1"></div>
+            <div class="bg-blob bg-blob-2"></div>
+        </div>
+
+        <!-- MENU SCREEN -->
+        <div id="menu-screen" class="screen active">
+            <div class="menu-content">
+                <div class="title-container">
+                    <h1 class="title-main">FLIPPY</h1>
+                    <h2 class="title-sub">BOTTLE</h2>
+                </div>
+
+                <div class="stats-display">
+                    <div class="stat-item">
+                        <svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                            <path d="M4 22h16"></path>
+                            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                        </svg>
+                        <span>High Score: <span id="menu-highscore">0</span></span>
+                    </div>
+                    <div class="stat-item">
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+                        </svg>
+                        <span>Total Points: <span id="menu-points">0</span></span>
+                    </div>
+                </div>
+
+                <div class="menu-buttons">
+                    <button id="start-btn" class="btn-primary">START GAME</button>
+                    <div class="btn-row">
+                        <button id="shop-btn" class="btn-secondary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                                <path d="M3 6h18"></path>
+                                <path d="M16 10a4 4 0 0 1-8 0"></path>
+                            </svg>
+                            SHOP
+                        </button>
+                        <button id="settings-btn" class="btn-secondary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            STYLE
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GAME SCREEN -->
+        <div id="game-screen" class="screen">
+            <div class="game-ui">
+                <div class="game-stats">
+                    <div class="score" id="game-score">0</div>
+                    <div id="combo-display" class="combo-display" style="display: none;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path>
+                        </svg>
+                        <span id="combo-text">x0 COMBO!</span>
+                    </div>
+                </div>
+                <button id="end-btn" class="btn-end">END</button>
+            </div>
+
+            <!-- Particles Container -->
+            <div id="particles-container"></div>
+
+            <!-- Flip Result -->
+            <div id="flip-result" class="flip-result" style="display: none;"></div>
+
+            <!-- Game Area -->
+            <div class="game-area">
+                <div class="ground"></div>
+                <div id="bottle" class="bottle">
+                    <div class="bottle-cap"></div>
+                    <div class="bottle-shine"></div>
+                    <div id="bottle-emoji" class="bottle-emoji">💧</div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <div class="power-meter-container">
+                    <div class="power-meter-header">
+                        <span>POWER</span>
+                        <span id="power-percent">0%</span>
+                    </div>
+                    <div class="power-meter-track">
+                        <div id="power-meter-bar" class="power-meter-bar"></div>
+                    </div>
+                    <div id="zone-indicator" class="zone-indicator"></div>
+                </div>
+
+                <button id="flip-btn" class="btn-flip">HOLD!</button>
+                <div class="controls-hint">Hold button to charge • Release in green (60-95%) for perfect flips!</div>
+            </div>
+        </div>
+
+        <!-- SHOP SCREEN -->
+        <div id="shop-screen" class="screen">
+            <div class="shop-content">
+                <div class="shop-header">
+                    <h2 class="shop-title">SHOP</h2>
+                    <button id="shop-back-btn" class="btn-back">BACK</button>
+                </div>
+
+                <div class="points-display">
+                    <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+                    </svg>
+                    <span>Your Points: <span id="shop-points">0</span></span>
+                </div>
+
+                <div id="bottles-grid" class="bottles-grid"></div>
+            </div>
+        </div>
+
+        <!-- SETTINGS SCREEN -->
+        <div id="settings-screen" class="screen">
+            <div class="settings-content">
+                <div class="settings-header">
+                    <h2 class="settings-title">STYLE</h2>
+                    <button id="settings-back-btn" class="btn-back">BACK</button>
+                </div>
+
+                <div class="settings-section">
+                    <h3 class="section-title">Choose Background</h3>
+                    <div id="backgrounds-grid" class="backgrounds-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
